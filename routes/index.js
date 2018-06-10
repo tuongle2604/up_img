@@ -18,17 +18,20 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/upload', upload.single('image'),function(req, res, next) {
-  console.log(req.file);
-  if (req.file)
+  if (req.file) {
     res.json({
       status: true,
       data: req.protocol + '://' + req.get('host') + '/images/' + req.file.filename
     })
+  }
 
-  res.json({
-    status: false,
-    data: "some thing happend"
-   })
+  else {
+    res.json({
+      status: false,
+      data: "some thing happend"
+     })
+  }
+
 });
 
 module.exports = router;
